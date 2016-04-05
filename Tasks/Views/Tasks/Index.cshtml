@@ -1,8 +1,20 @@
-﻿@model Tasks.Models.Task
+﻿@model IEnumerable<Tasks.Models.Task>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+@foreach (var t in Model)
+{
+    if (t.IsFinished)
+    {
+        <li style="text-decoration: line-through">@t.Description, by @t.Name</li>
+    }
+    else
+    {
+        <li>@t.Description, by @t.Name</li>
+    }
+}
 
