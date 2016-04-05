@@ -14,11 +14,17 @@ namespace Tasks.Controllers
         {
             List<Task> tasks = new List<Task>
             {
-                new Task() {Name = "Kate", Description = "Take a nap", IsFinished = false},
-                new Task() {Name = "Kate", Description = "cry", IsFinished = true},
-                new Task() {Name = "Kate", Description = "Get a job", IsFinished = false},
+                new Task() {OwnerName = "Kate", Description = "Take a nap", IsFinished = false},
+                new Task() {OwnerName = "Kate", Description = "cry", IsFinished = true},
+                new Task() {OwnerName = "Kate", Description = "Get a job", IsFinished = false},
             };
-            return View(tasks);
+            if (Session["tasks"] == null)
+            {
+                Session["tasks"] = new List<Task>(tasks);
+            }
+            var SessionTasks = (List<Task>)Session["tasks"];
+
+            return View(SessionTasks);
         }
 
 
@@ -30,13 +36,20 @@ namespace Tasks.Controllers
 
         // POST: Tasks/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Task task)
         {
-
-            // TODO: Add insert logic here
+            if (Session["tasks"] == null)
+            {
+                Session["tasks"] = new List<Task>();
+            }
+            if (ModelState.IsValid)
+            {
+                var Tasks = (List<Task>)Session["tasks"];
+                Tasks.Add(task);
+                Session["tasks"] = Tasks;
+            }
 
             return RedirectToAction("Index");
-
         }
     }
 }

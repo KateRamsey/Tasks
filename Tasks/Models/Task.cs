@@ -9,7 +9,7 @@ namespace Tasks.Models
     public class Task
     {
         [Required]
-        public string Name { get; set; }
+        public string OwnerName { get; set; }
         [Required]
         public string Description { get; set; }
         public bool IsFinished { get; set; }
