@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tasks.Models;
 
 namespace Tasks.Controllers
 {
@@ -11,7 +12,13 @@ namespace Tasks.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
-            return View();
+            List<Task> tasks = new List<Task>
+            {
+                new Task() {Name = "Kate", Description = "Take a nap", IsFinished = false},
+                new Task() {Name = "Kate", Description = "cry", IsFinished = true},
+                new Task() {Name = "Kate", Description = "Get a job", IsFinished = false},
+            };
+            return View(tasks);
         }
 
 
@@ -25,16 +32,11 @@ namespace Tasks.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        } 
+            // TODO: Add insert logic here
+
+            return RedirectToAction("Index");
+
+        }
     }
 }
