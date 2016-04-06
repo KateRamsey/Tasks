@@ -48,6 +48,10 @@ namespace Tasks.Controllers
                 Tasks.Add(task);
                 Session["tasks"] = Tasks;
             }
+            else
+            {
+                return View("Create", task);
+            }
 
             return RedirectToAction("Index");
         }
